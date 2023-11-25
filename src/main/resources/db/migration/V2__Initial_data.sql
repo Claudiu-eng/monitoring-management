@@ -1,0 +1,4 @@
+-- ALTER TABLE measure
+--     MODIFY COLUMN timestamp FLOAT ;
+--
+--

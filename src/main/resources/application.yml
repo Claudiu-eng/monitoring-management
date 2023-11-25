@@ -1,0 +1,56 @@
+database:
+  ip : ${DB_IP:localhost}
+  port : ${DB_PORT:3306}
+  user : ${DB_USER:root}
+  password: ${DB_PASSWORD:12345678}
+  name: ${DB_DBNAME:monitoring}
+
+allowed:
+  origins: ${ALLOWED_ORIGINS:http://localhost:4200}
+
+spring:
+  datasource:
+    url: jdbc:mysql://${database.ip}:${database.port}/${database.name}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: ${database.user}
+    password: ${database.password}
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect : org.hibernate.dialect.MySQLDialect
+    database: mysql
+  rabbitmq:
+    host: kangaroo.rmq.cloudamqp.com
+    port: 5672
+    username: xkjjwrpn
+    password: V-a0wfApZv-T2uV4iqxap8_kialC_7_1
+    virtual-host: xkjjwrpn
+
+exchange:
+  name: send-device-exchange
+queue-data:
+  name: send-device-queue
+routing-data:
+  key: send-device-routingkey
+queue-value:
+  name: send-value-queue
+routing-value:
+  key: send-value-routingkey
+
+server:
+  port: ${PORT:8095}
+  tomcat:
+    threads:
+      max : 1
+
+#logging:
+#  level:
+#    root: error
+#    org.springframework: error
+#    ro.tuc: error
